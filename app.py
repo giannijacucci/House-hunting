@@ -138,7 +138,7 @@ tasso_min = st.sidebar.number_input("Tasso minimo (%)", value=2.8, step=0.1)
 tasso_max = st.sidebar.number_input("Tasso massimo (%)", value=3.3, step=0.1)
 tasso_fisso = st.sidebar.number_input("Tasso fisso per analisi dettagliata (%)", value=3.0, step=0.1)
 
-anticipo_max = st.sidebar.number_input("Anticipo massimo che puoi mettere (€)", value=60000, step=5000)
+anticipo_max = st.sidebar.number_input("Anticipo massimo che possiamo mettere (€)", value=60000, step=5000)
 
 # ==============================
 # 1) Plot mutuo & valore vs tasso
@@ -157,7 +157,7 @@ valore_max_immobile_fisso = mutuo_massimo_fisso / quota_mutuo
 
 st.markdown(
     f"""
-**Al tasso fisso del {tasso_fisso:.2f}%** puoi ottenere indicativamente:
+**Al tasso fisso del {tasso_fisso:.2f}%** possiamo ottenere indicativamente:
 - Mutuo massimo (con rata = {quota_rata*100:.0f}% dello stipendio): **€ {mutuo_massimo_fisso:,.0f}**
 - Valore massimo della casa (con mutuo {quota_mutuo*100:.0f}%): **€ {valore_max_immobile_fisso:,.0f}**
 """
