@@ -115,10 +115,10 @@ def fig_anticipo_vs_valore(valore_max_immobile, quota_anticipo,
 
 st.set_page_config(page_title="Mutuo & Casa", page_icon="🏠", layout="centered")
 
-st.title("🏠 Analizzatore di mutuo & valore immobile")
+st.title("🏠 Case a prima vista")
 
 st.markdown(
-    "Strumentino per capire **quanto puoi permetterti** in base allo stipendio, "
+    "Strumentino per capire cosa possiamo permetterci in base allo stipendio, "
     "al tasso e all'anticipo."
 )
 
@@ -182,7 +182,7 @@ valore_limite_anticipo = anticipo_max / quota_anticipo
 
 st.markdown(
     f"""
-- Anticipo massimo che vuoi/pensi di poter mettere: **€ {anticipo_max:,.0f}**
+- Anticipo massimo che possiamo permetterci: **€ {anticipo_max:,.0f}**
 - Questo corrisponde a un valore immobile di **€ {valore_limite_anticipo:,.0f}** (dato l'anticipo {quota_anticipo*100:.0f}%)
 """
 )
@@ -198,7 +198,7 @@ valore_max_immobile_100 = mutuo_massimo_100  # se il mutuo è 100%
 
 st.markdown(
     f"""
-Se (ipotesi) una banca ti finanziasse il **100%** del valore della casa:
+Se una banca finanziasse il **100%** del valore della casa (vantaggi per under 36):
 
 - Mutuo massimo: **€ {mutuo_massimo_100:,.0f}**
 - Valore massimo immobile (100% mutuo): **€ {valore_max_immobile_100:,.0f}**
