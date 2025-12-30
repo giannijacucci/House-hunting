@@ -118,8 +118,9 @@ st.set_page_config(page_title="Mutuo & Casa", page_icon="🏠", layout="centered
 st.title("🏠 Case a prima vista")
 
 st.markdown(
-    "Strumentino per capire cosa possiamo permetterci in base allo stipendio, "
-    "al tasso e all'anticipo."
+    "Strumentino per capire **cosa possiamo permetterci** "
+    "in base allo stipendio, al tasso e all'anticipo.\n\n"
+    "⚠️ *Il file è interattivo: tutti i valori possono essere modificati direttamente in questa pagina.*"
 )
 
 # --- Sidebar parametri base ---
