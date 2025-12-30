@@ -148,7 +148,7 @@ anticipo_max = st.sidebar.number_input("Anticipo massimo che possiamo mettere (�
 st.subheader("1️⃣ Mutuo massimo e valore immobile vs tasso")
 
 st.markdown(
-    "Questa sezione mostra, in funzione del tasso, quale sia il valore massimo di mutuo/immobile possiamo permetterci."
+    "Questa sezione mostra, in funzione del tasso, quale sia il valore massimo di mutuo/immobile che possiamo permetterci."
 )
 
 fig1, tassi, mutui, immobili = fig_mutuo_vs_tasso(
@@ -174,7 +174,7 @@ st.markdown(
 
 st.subheader("2️⃣ Anticipo vs valore immobile")
 st.markdown(
-    "Questa sezione tiene conto di quale sia l'anticipo massimo che possiamo permetterci. Questo pone un tetto più realistico al budget."
+    "Questa sezione tiene conto di quale sia l'anticipo massimo che possiamo permetterci, ponendo un tetto più realistico al budget."
 )
 
 fig2 = fig_anticipo_vs_valore(
