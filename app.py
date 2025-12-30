@@ -147,6 +147,10 @@ anticipo_max = st.sidebar.number_input("Anticipo massimo che possiamo mettere (�
 
 st.subheader("1️⃣ Mutuo massimo e valore immobile vs tasso")
 
+st.markdown(
+    "Questa sezione mostra, in funzione del tasso, quale sia il valore massimo di mutuo/immobile possiamo permetterci."
+)
+
 fig1, tassi, mutui, immobili = fig_mutuo_vs_tasso(
     stipendio, anni, quota_mutuo, quota_rata, tasso_min, tasso_max
 )
@@ -158,7 +162,7 @@ valore_max_immobile_fisso = mutuo_massimo_fisso / quota_mutuo
 
 st.markdown(
     f"""
-**Al tasso fisso del {tasso_fisso:.2f}%** possiamo ottenere indicativamente:
+**Ad esempio, al tasso fisso del {tasso_fisso:.2f}%** possiamo ottenere indicativamente:
 - Mutuo massimo (con rata = {quota_rata*100:.0f}% dello stipendio): **€ {mutuo_massimo_fisso:,.0f}**
 - Valore massimo della casa (con mutuo {quota_mutuo*100:.0f}%): **€ {valore_max_immobile_fisso:,.0f}**
 """
@@ -169,6 +173,9 @@ st.markdown(
 # ==============================
 
 st.subheader("2️⃣ Anticipo vs valore immobile")
+st.markdown(
+    "Questa sezione tiene conto di quale sia l'anticipo massimo che possiamo permetterci. Questo pone un tetto più realistico al budget."
+)
 
 fig2 = fig_anticipo_vs_valore(
     valore_max_immobile_fisso,
@@ -196,13 +203,17 @@ st.subheader("3️⃣ Scenario ipotetico: 100% mutuo (nessun anticipo)")
 
 mutuo_massimo_100 = calcola_mutuo_massimo(stipendio, quota_rata, tasso_fisso, anni)
 valore_max_immobile_100 = mutuo_massimo_100  # se il mutuo è 100%
+# rata mensile al tasso fisso (es. 3%)
+tasso_mensile_100 = (tasso_fisso / 100) / 12
+n_rate_100 = anni * 12
+rata_100 = mutuo_massimo_100 * tasso_mensile_100 / (1 - (1 + tasso_mensile_100) ** -n_rate_100)
 
 st.markdown(
     f"""
 Se una banca finanziasse il **100%** del valore della casa (vantaggi per under 36):
 
-- Mutuo massimo: **€ {mutuo_massimo_100:,.0f}**
-- Valore massimo immobile (100% mutuo): **€ {valore_max_immobile_100:,.0f}**
+- Valore massimo immobile (100% mutuo, tasso al 3%): **€ {valore_max_immobile_100:,.0f}**
+- **Rata mensile** al {tasso_fisso:.1f}% per {anni} anni: **€ {rata_100:,.2f}**
 """
 )
 
@@ -211,6 +222,12 @@ Se una banca finanziasse il **100%** del valore della casa (vantaggi per under 3
 # ==============================
 
 st.subheader("4️⃣ Verifica un prezzo specifico")
+
+st.markdown(
+    f"""
+Qui mettiamo il prezzo di una casa e ci aiuta a calcolare come questo si traduce in costi e se possiamo permettercela.
+"""
+)
 
 prezzo_immobile = st.number_input("Prezzo dell'immobile da valutare (€)", min_value=50000.0, max_value=2000000.0, value=300000.0, step=10000.0)
 
