@@ -1,3 +1,4 @@
+import io
 from pathlib import Path
 
 import numpy as np
@@ -45,6 +46,14 @@ MODELLO_CSV = (
     "1,Demolizioni e rimozioni,Esempio: demolizione pavimenti,100,mq,16.5,,\n"
     "2,\"Massetti, pavimenti, rivestimenti\",Esempio: posa pavimenti (forniti da noi),100,mq,30,,Solo posa\n"
 )
+
+
+def mostra(fig):
+    """Mostra la figura come SVG: è vettoriale, quindi resta nitida a ogni zoom e su schermi Retina."""
+    svg = io.StringIO()
+    fig.savefig(svg, format="svg", bbox_inches="tight")
+    plt.close(fig)
+    st.image(svg.getvalue(), width="stretch")
 
 
 def stile_assi(ax):
@@ -250,7 +259,7 @@ with tab_budget:
     fig1, tassi, mutui, immobili = fig_mutuo_vs_tasso(
         stipendio, anni, quota_mutuo, quota_rata, tasso_min, tasso_max
     )
-    st.pyplot(fig1)
+    mostra(fig1)
 
     # mutuo / casa al tasso fisso scelto
     mutuo_massimo_fisso = calcola_mutuo_massimo(stipendio, quota_rata, tasso_fisso, anni)
@@ -277,7 +286,7 @@ with tab_budget:
         anni,
         anticipo_max
     )
-    st.pyplot(fig2)
+    mostra(fig2)
 
     valore_limite_anticipo = anticipo_max / quota_anticipo if quota_anticipo > 0 else float("inf")
 
@@ -459,7 +468,7 @@ with tab_casa:
 
         per_categoria = totali_per_categoria(computo_eff)
         voci = {**per_categoria.to_dict(), **voci_extra}
-        st.pyplot(fig_lavori_per_voce(voci, n_computo=len(per_categoria)))
+        mostra(fig_lavori_per_voce(voci, n_computo=len(per_categoria)))
         st.caption("In rosa le voci del computo, in grigio quelle che il computo non copre (IVA esclusa).")
 
         st.download_button(
@@ -493,10 +502,10 @@ with tab_casa:
     k3.metric("Rata mensile", f"€ {rata:,.0f}",
               delta=f"{rata_massima_sostenibile - rata:,.0f} rispetto al massimo")
 
-    st.pyplot(fig_copertura(prezzo_immobile, costi_acquisto, lavori_totale,
+    mostra(fig_copertura(prezzo_immobile, costi_acquisto, lavori_totale,
                             piano["mutuo"], risparmi_usati, mancano))
 
-    st.pyplot(fig_rata_nel_tempo(rata, rata_massima_sostenibile, detrazione_annua, anni))
+    mostra(fig_rata_nel_tempo(rata, rata_massima_sostenibile, detrazione_annua, anni))
 
     st.markdown(
         f"""
