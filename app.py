@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -35,6 +37,8 @@ colorLight  = hex_to_rgb('#D3D3D3')
 colorRed    = hex_to_rgb('#E34948')
 
 euro = FuncFormatter(lambda x, _: f"€ {x/1000:,.0f}k")
+
+COMPUTO_DEFAULT = Path(__file__).parent / "computo_casa.csv"
 
 MODELLO_CSV = (
     "n,categoria,lavorazione,quantita,um,prezzo,codice,nota\n"
@@ -339,7 +343,7 @@ with tab_casa:
 
     modo_lavori = st.radio(
         "Come stimiamo i lavori?",
-        ["Stima veloce a €/mq", "Computo dettagliato", "Nessun lavoro"],
+        ["Computo dettagliato", "Stima veloce a €/mq", "Nessun lavoro"],
         horizontal=True,
     )
 
@@ -358,7 +362,8 @@ with tab_casa:
 
     elif modo_lavori == "Computo dettagliato":
         caricato = st.file_uploader(
-            "Carica il computo (CSV con le colonne n, categoria, lavorazione, quantita, um, prezzo, codice, nota)",
+            ("Carica un computo diverso" if COMPUTO_DEFAULT.exists() else "Carica il computo")
+            + " (CSV con le colonne n, categoria, lavorazione, quantita, um, prezzo, codice, nota)",
             type="csv",
         )
         computo_base = None
@@ -367,6 +372,10 @@ with tab_casa:
                 computo_base = carica_computo(caricato)
             except Exception as err:
                 st.error(f"Non riesco a leggere il CSV. {err}")
+        elif COMPUTO_DEFAULT.exists():
+            computo_base = carica_computo(COMPUTO_DEFAULT)
+            st.caption(f"Computo salvato nell'app ({COMPUTO_DEFAULT.name}): "
+                       f"€ {totale_computo(computo_base):,.2f} IVA esclusa.")
         else:
             st.info("Il computo non è salvato nell'app: caricalo qui sopra. "
                     "Puoi partire dal modello e riempirlo con le voci del preventivo.")
