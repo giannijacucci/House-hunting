@@ -26,7 +26,9 @@ COLONNE_COMPUTO = ["n", "categoria", "lavorazione", "quantita", "um", "prezzo", 
 
 # Scenari pensati per il computo della casa che stiamo valutando (numeri di voce di quel documento):
 # compaiono solo se il CSV caricato ha quelle voci.
-# Le macerie da 40 m3 sono stimate come ~18 m3 di intonaco + ~20 m3 di pavimenti + ~2 m3 di altro.
+# Le macerie (voce 17) sono stimate per il 45% intonaco, 50% pavimenti e 5% altro.
+QUOTA_MACERIE_INTONACO = 0.45
+QUOTA_MACERIE_PAVIMENTI = 0.50
 SCENARI = {
     "intonaco_ok": "L'intonaco esistente è in buono stato (niente spicconatura, intonaco nuovo solo nel sottotetto)",
     "pavimento_ok": "Si posa sopra il pavimento esistente (niente demolizione né massetto)",
@@ -58,19 +60,23 @@ def applica_scenari(df, scenari):
         if n in righe:
             df.loc[df["n"] == n, colonna] = valore
 
-    macerie_in_meno = 0
+    def quantita(n):
+        return float(df.loc[df["n"] == n, "quantita"].iloc[0])
+
+    quota_macerie_in_meno = 0
     if scenari.get("intonaco_ok"):
+        # Intonaco nuovo solo dove non si spiccona (il sottotetto): voce 12 meno voce 7
+        imposta(12, "quantita", max(0.0, quantita(12) - quantita(7)))
         imposta(7, "includi", False)
-        imposta(12, "quantita", 100.5)
-        macerie_in_meno += 18
+        quota_macerie_in_meno += QUOTA_MACERIE_INTONACO
     if scenari.get("pavimento_ok"):
         imposta(4, "includi", False)
         imposta(8, "includi", False)
-        macerie_in_meno += 20
+        quota_macerie_in_meno += QUOTA_MACERIE_PAVIMENTI
     if scenari.get("pittura_mercato"):
         imposta(14, "prezzo", 8.0)
-    if macerie_in_meno and 17 in righe and 18 in righe:
-        m3 = max(2.0, float(df.loc[df["n"] == 17, "quantita"].iloc[0]) - macerie_in_meno)
+    if quota_macerie_in_meno and 17 in righe and 18 in righe:
+        m3 = max(2.0, quantita(17) * (1 - quota_macerie_in_meno))
         imposta(17, "quantita", m3)
         imposta(18, "quantita", m3 * 1800)
     return df
@@ -94,12 +100,15 @@ def quantita_da_computo(df):
         trovate = df[testo.str.contains("posa") & testo.apply(lambda t: all(p in t for p in parole))]
         return float(trovate["quantita"].sum()) if len(trovate) else default
 
+    # Numero di bagni scritto nel testo, es. "Posa rivestimenti 2 bagni"
+    numeri_bagni = (df["lavorazione"] + " " + df["nota"]).str.extract(r"(\d+)\s+bagn", expand=False).dropna()
+
     return {
         "pavimenti_mq": cerca("pavimenti", default=100.0),
         "rivestimenti_mq": cerca("rivestimenti", default=10.0),
         "battiscopa_m": cerca("battiscopa", default=60.0),
         "n_porte": int(cerca("porte interne", default=5)),
-        "n_bagni": 1,
+        "n_bagni": int(numeri_bagni.astype(int).max()) if len(numeri_bagni) else 1,
     }
 
 

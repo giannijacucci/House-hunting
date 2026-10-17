@@ -2,21 +2,21 @@ n,categoria,lavorazione,quantita,um,prezzo,codice,nota
 1,Demolizioni e rimozioni,Smontaggio porte interne in legno,7,cad,15,22CL.PR.R.002110.030.a,
 2,Demolizioni e rimozioni,Smontaggio finestre e persiane in legno,8,cad,50,22CL.PR.R.002110.010.a,
 3,Demolizioni e rimozioni,Rimozione sanitari,8,cad,25,22CL.PR.R.002120.010.a,Nuovi sanitari non previsti
-4,Demolizioni e rimozioni,Demolizione pavimenti con sottofondo,217,mq,16.5,22CL.PR.R.000260.040.a,PT 96 + 1° piano 83 + sottotetto 38 mq
-5,Demolizioni e rimozioni,Demolizione rivestimenti bagni,48.3,mq,25,22CL.PR.R.000260.160.a,
+4,Demolizioni e rimozioni,Demolizione pavimenti con sottofondo,131,mq,16.5,22CL.PR.R.000260.040.a,PT 57 + 1° piano 50 + soffitta 24 mq (planimetria)
+5,Demolizioni e rimozioni,Demolizione rivestimenti bagni,38.0,mq,25,22CL.PR.R.000260.160.a,"Pareti dei 2 bagni × 2,10 m (planimetria)"
 6,Demolizioni e rimozioni,Rimozione tubazioni bagni,24,m,10,22CL.PR.R.002120.020.a,
-7,Demolizioni e rimozioni,Spicconatura intonaco fino al mattone,538.1,mq,12,22CL.PR.R.000250.010.a,È necessaria?
-8,"Massetti, pavimenti, rivestimenti",Massetto di sottofondo 8-10 cm,217,mq,28,22CL.PR.E.000720.020.a,
-9,"Massetti, pavimenti, rivestimenti",Posa pavimenti in gres (forniti da noi),217,mq,30,22CL.PR.E.001310.020.b,Solo posa
-10,"Massetti, pavimenti, rivestimenti",Posa battiscopa (fornito da noi),135,m,6,22CL.PR.E.001580.050.a,Solo posa
-11,"Massetti, pavimenti, rivestimenti",Posa rivestimenti bagni (forniti da noi),29.4,mq,38,24,Solo posa
-12,"Intonaci, rasature, pittura",Intonaco civile nuovo,638.6,mq,28,22CL.PR.E.001620.050.a,Include sottotetto 100.5 mq
-13,"Intonaci, rasature, pittura",Rasatura a gesso e calce,638.6,mq,14,22CL.PR.E.001620.110.a,
-14,"Intonaci, rasature, pittura","Tinteggiatura idropittura lavabile, 3 mani",638.6,mq,12,22CL.PR.E.002120.040.c,Prezzo alto?
+7,Demolizioni e rimozioni,Spicconatura intonaco fino al mattone,448.6,mq,12,22CL.PR.R.000250.010.a,Pareti e soffitti di PT e 1° piano (planimetria). È necessaria?
+8,"Massetti, pavimenti, rivestimenti",Massetto di sottofondo 8-10 cm,131,mq,28,22CL.PR.E.000720.020.a,
+9,"Massetti, pavimenti, rivestimenti",Posa pavimenti in gres (forniti da noi),131,mq,30,22CL.PR.E.001310.020.b,Solo posa
+10,"Massetti, pavimenti, rivestimenti",Posa battiscopa (fornito da noi),112,m,6,22CL.PR.E.001580.050.a,Solo posa
+11,"Massetti, pavimenti, rivestimenti",Posa rivestimenti 2 bagni (forniti da noi),29.4,mq,38,24,Solo posa
+12,"Intonaci, rasature, pittura",Intonaco civile nuovo,523.0,mq,28,22CL.PR.E.001620.050.a,Include soffitta 74.5 mq
+13,"Intonaci, rasature, pittura",Rasatura a gesso e calce,523.0,mq,14,22CL.PR.E.001620.110.a,
+14,"Intonaci, rasature, pittura","Tinteggiatura idropittura lavabile, 3 mani",523.0,mq,12,22CL.PR.E.002120.040.c,Prezzo alto?
 15,Finestre e porte,Finestre PVC color legno con scuretti (8 x 2 mq),16,mq,880,22CL.PR.E.001890.010.a,Posa controtelaio esclusa
 16,Finestre e porte,Posa controtelaio e porte interne (fornite da noi),7,cad,150,34,Solo posa
-17,Trasporto e discarica,Trasporto a discarica degli inerti,40,m3,90,35,
-18,Trasporto e discarica,Conferimento in discarica (1800 kg/m3),72000,kg,0.05,36,
+17,Trasporto e discarica,Trasporto a discarica degli inerti,29,m3,90,35,Ricalcolato sulle superfici della planimetria
+18,Trasporto e discarica,Conferimento in discarica (1800 kg/m3),52200,kg,0.05,36,
 19,Finestre e porte,Posa porta blindata (fornita da noi),1,cad,250,39,Solo posa
 20,Impianti,Impianto elettrico,1,a corpo,10000,41,Ipotesi
 21,Impianti,Impianto idrico bagni con colonne montanti,1,a corpo,8000,42,Ipotesi
